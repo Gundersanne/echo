@@ -747,11 +747,12 @@ func TestMethodNotAllowedAndNotFound(t *testing.T) {
 			expectError: ErrMethodNotAllowed,
 		},
 		{
+			// isn't best match a route which matches the path but not the method?
 			name:        "best match is any route up in tree",
 			whenMethod:  http.MethodGet,
 			whenURL:     "/users/1",
-			expectRoute: "/*",
-			expectParam: map[string]string{"*": "users/1"},
+			expectRoute: nil,
+			expectError: ErrMethodNotAllowed,
 		},
 	}
 	for _, tc := range testCases {

@@ -526,10 +526,10 @@ func (r *Router) Find(method, path string, c Context) {
 			// best matching in case we do no find no more routes matching this path+method
 			if previousBestMatchNode == nil {
 				previousBestMatchNode = currentNode
-			}
-			if h := currentNode.findHandler(method); h != nil {
-				matchedHandler = h
-				break
+				if h := currentNode.findHandler(method); h != nil {
+					matchedHandler = h
+					break
+				}
 			}
 		}
 
